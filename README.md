@@ -23,7 +23,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Frontend Mentor](https://www.frontendmentor.io/challenges/tip-calculator-app-ugJNGbJUX/hub)
+- Solution URL: [Frontend Mentor](https://www.frontendmentor.io/solutions/tip-calculator-app-made-with-react-and-sass-BFGMkhPwoO)
 - Live Site URL: [Github](https://r3ygoski.github.io/tip-calculator-app-react/)
 
 ## My process

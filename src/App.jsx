@@ -1,10 +1,10 @@
-// Images
+// Image
 import logo from './assets/logo.svg'
-import dollarIcon from './assets/icon-dollar.svg'
-import personIcon from './assets/icon-person.svg'
 
 // Components
 import TipButton from './components/Calculator/TipButtons'
+import BillInput from './components/Calculator/BillInput'
+import PeopleInput from './components/Calculator/PeopleInput'
 import CustomTip from './components/Calculator/CustomTip'
 import Attribution from './components/Attribution'
 
@@ -16,9 +16,10 @@ import { buttons } from './javascript/buttons'
 
 // Regex
 import { billRegex, numberRegex } from './javascript/regex'
+import Display from './components/Display'
 
 function App() {
-  // Input States
+  // Input States - Bill Input Value, Num Peoples Input Value, Custom Tip Value.
   const [bill, setBill] = useState('')
   const [peoples, setPeoples] = useState('1')
   const [customTip, setCustomTip] = useState('')
@@ -27,18 +28,20 @@ function App() {
   const [tipPercentage, setTipPercentage] = useState(0)
 
   // Result States
-  const [tipAmout, setTipAmount] = useState('0.00')
+  const [tipAmount, setTipAmount] = useState('0.00')
   const [total, setTotal] = useState('0.00')
 
-  // Errors States
+  // Errors States - Bill Error Handler, Num Peoples Error Handler.
   const [billErr, setBillErr] = useState('')
   const [peoplesErr, setPeoplesErr] = useState('')
 
+  // Reset Display Values
   const resetDisplay = () => {
     setTipAmount('0.00')
     setTotal('0.00')
   }
 
+  // Reset Input Values + Display
   const resetInput = () => {
     setBill('')
     setPeoples('1')
@@ -46,6 +49,7 @@ function App() {
     resetDisplay()
   }
 
+  // Receive each Bill Input and check if it's number or not. 
   const checkBillInput = (vl) => {
     if (billRegex.test(vl)){
       setBill(vl)
@@ -54,6 +58,7 @@ function App() {
       setBillErr('Only Numbers or .')
     }
   }
+  // Receive each Num Peoples Input and check if it's number or not.
   const checkPeoplesInput = (vl) => {
     if (numberRegex.test(vl)){
       setPeoples(vl)
@@ -64,15 +69,20 @@ function App() {
   }
 
   useEffect(()=>{
+    // Calculate Tip based on Tip type Button/Custom
     function calculateTip(tipType){
-      const billConverted = Number(bill)
-      const tipPercentageConverted = Number(tipType)
-      const peoplesConverted = Number(peoples)
 
+      // Convet Bill, Num Peoples and Tip Percentage to Number
+      const billConverted = Number(bill)
+      const peoplesConverted = Number(peoples)
+      const tipPercentageConverted = Number(tipType)
+
+      // Calculate Total Tip, Tip per Person and Total value per Person
       const tip = (tipPercentageConverted * billConverted) / 100
       const tipPerPerson = tip / peoplesConverted
       const totalValue = (tip + billConverted) / peoplesConverted
 
+      // Update Total State with formatted value
       setTotal(totalValue.toLocaleString('en-US', {
         minimumFractionDigits: 2, 
         maximumFractionDigits: 2
@@ -80,8 +90,10 @@ function App() {
       return tipPerPerson
     }
 
+    // Check if are using Custom Tip or Button Tip
     const tipPercentageValue = customTip === '' ? tipPercentage : customTip
 
+    // Check peoples is Empty
     if (peoples==''){
       setPeoplesErr('Cannot be empty')
       resetDisplay()
@@ -106,14 +118,7 @@ function App() {
       <main className='app'>
         {/* Calculator */}
         <section className='app__calculator'>
-
-          <div className='app__calculator__bill'>
-            <label htmlFor="bill">Bill</label>
-            {billErr?<span>{billErr}</span>:''}
-            <input className={!billErr?'':'input--error'} id="bill" type="text" placeholder='0' 
-              onChange={(e)=>checkBillInput(e.target.value)} value={bill} />
-            <img src={dollarIcon} alt="" />
-          </div>
+          <BillInput bill={bill} billErr={billErr} checkBillInput={checkBillInput}/>
 
           <div className='app__calculator__btns'>
             <label htmlFor="Tip">Select Tip %</label>
@@ -125,35 +130,11 @@ function App() {
             </div>
           </div>
 
-          <div className='app__calculator__peoples'>
-            <label htmlFor="peoples">Number of People</label>
-            {peoplesErr?<span>{peoplesErr}</span>:''}
-            <input className={!peoplesErr?'':'input--error'} id="peoples" type="text" placeholder='0' 
-              onChange={(e)=>checkPeoplesInput(e.target.value)} value={peoples}/>
-            <img src={personIcon} alt="" />
-          </div>
-
+          <PeopleInput peoples={peoples} peoplesErr={peoplesErr} checkPeoplesInput={checkPeoplesInput}/>
         </section>
 
         {/* Display */}
-        <section className='app__display'>
-
-          <div className='app__display__tip'>
-            <p>Tip Amount <br/> <span className='per-person-label'>/ person </span></p>
-            <span className='app__display__tip-result'>${tipAmout}</span>
-          </div>
-
-          <div className='app__display__total'>
-            <p>Total <br/> <span className='per-person-label'>/ person </span></p>
-            <span className='app__display__total-result'>${total}</span>
-          </div>
-
-          <button className={bill==0 || peoples==0 ? 'app__display__btn--disabled' : 'app__display__btn'}
-            onClick={resetInput}>
-            Reset
-          </button>
-          
-        </section>
+        <Display bill={bill} peoples={peoples} resetInput={resetInput} tipAmount={tipAmount} total={total} />
       </main>
       
       <Attribution />

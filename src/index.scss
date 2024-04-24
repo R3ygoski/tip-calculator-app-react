@@ -1,8 +1,9 @@
 @use './scss/abstract/var' as v;
-@use './scss/components/App.scss';
-@use './scss/components/TipButton.scss';
-@use './scss/components/CustomTip.scss';
-@use './scss/components/Attribution.scss';
+@use './scss/components/App';
+@use './scss/components/TipButton';
+@use './scss/components/CustomTip';
+@use './scss/components/Display';
+@use './scss/components/Attribution';
 
 * {
   padding: 0;

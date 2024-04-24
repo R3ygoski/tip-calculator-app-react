@@ -6,8 +6,7 @@ export default function CustomTip({customTip, setCustomTip}){
         onChange={(e)=>setCustomTip(e.target.value)}  
         onInput={(e)=>{
             e.target.value<0?
-            e.target.value = ''
-            :''
+            e.target.value = '':''
         }}/>
     )
 }

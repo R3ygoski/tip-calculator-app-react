@@ -1,0 +1,160 @@
+@use '../abstract/var' as v;
+
+.app {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2.25rem;
+    padding: 1.25rem;
+    border-radius: 1.25rem 1.25rem 0 0;
+    background: v.$white;
+    box-shadow: 0 0 15px 10px rgba(0,0,0,.1);
+    &__calculator {
+        padding: 0.75rem;
+        &__bill, &__peoples {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            color: v.$dark-grayish-cyan;
+            input {
+                background: v.$very-light-grayish-cyan;
+                width: 100%;
+                font-size: 1.5rem;
+                margin-top: 0.5rem;
+                padding: 0.15rem 1rem;
+                border-radius: 0.5rem;
+                color: v.$very-dark-cyan;
+                &:focus {
+                    outline: 2px solid v.$strong-cyan;
+                    outline-offset: -2px;
+                }
+            }
+            .input--error {
+                outline: 2px solid v.$soft-red;
+                outline-offset: -2px;                
+            }
+            span {
+                position: absolute;
+                right: 0;
+                font-size: 0.8rem;
+                color: v.$soft-red;
+            }
+            img {
+                position: absolute;
+                top: 45px;
+                left: 18px;
+                width: 12px;
+            }
+        }
+        &__btns {
+            margin-top: 2.25rem;
+            color: v.$dark-grayish-cyan;
+            div {
+                display: flex;
+                flex-wrap: wrap;
+                padding-top: 1rem;
+                gap: 1rem 0.9rem;
+                button, input {
+                    border-radius: 0.25rem;
+                }
+            }
+        }
+        &__peoples {
+            margin-top: 2rem;
+            label {
+                font-size: 0.8rem;
+            }
+        }
+    }
+    &__display {
+        height: 256px;
+        margin: 1.65rem 0.2rem;
+        padding: 2.5rem 1.5rem;
+        border-radius: 1rem;
+        background: v.$very-dark-cyan;
+        &__tip, &__total {
+            display: flex;
+            justify-content: space-between;
+            color: v.$white;
+            .per-person-label {
+                font-size: 0.8rem;
+                color: v.$dark-grayish-cyan;
+            }
+            &-result {
+                font-size: 1.9375rem;
+                color: v.$strong-cyan;
+            }
+        }
+        &__total {
+            margin-top: 1rem;
+        }
+        &__btn, &__btn--disabled {
+            width: 100%;
+            height: 48px;
+            margin-top: 2rem;
+            border-radius: 0.25rem;
+            text-align: center;
+            font-size: 1.5rem;
+            background: v.$strong-cyan;
+            color: v.$very-dark-cyan;
+            transition: 0.3s;
+        }
+        &__btn {            
+            cursor: pointer;
+        }
+        &__btn--disabled {
+            filter: saturate(80%) brightness(80%) opacity(25%);
+        }
+    }
+}
+
+@media (min-width: 375px) {
+    .app {
+        &__calculator {
+            &__peoples {
+                label {
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 1024px){
+    .app {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 920px;
+        margin: auto 0;
+        padding-right: 2rem;
+        border-radius: 1.25rem;
+        &__calculator {
+            width: 50%;
+            padding: 1.5rem 0 1.5rem 1.75rem;
+            &__btns {
+                div {
+                    padding-top: 1.5rem;
+                }
+            }
+        }
+        &__display {
+            display: flex;
+            flex-wrap: wrap;
+            width: 410px;
+            height: 420px;
+            margin: 0.75rem 0rem;
+            padding: 2.5rem 2.25rem;
+            &__tip, &__total {
+                width: 100%;
+                &-result {
+                    font-size: 3rem;
+                }
+            }
+            &__total {
+                margin-top: 0rem;
+            }
+            &__btn, &__btn--disabled {
+                align-self: flex-end;
+            }
+        }
+    }
+}

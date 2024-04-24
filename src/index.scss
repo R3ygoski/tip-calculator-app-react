@@ -1,0 +1,39 @@
+@use './scss/abstract/var' as v;
+@use './scss/components/App.scss';
+@use './scss/components/TipButton.scss';
+@use './scss/components/CustomTip.scss';
+@use './scss/components/Attribution.scss';
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Space Mono', sans-serif;
+  font-weight: 700;
+  border: none;
+}
+html {
+  position: relative;
+  background: v.$light-grayish-cyan;
+}
+input {
+  text-align: right;
+}
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.logo {
+  margin-top: 3rem;
+}
+
+@media (min-width: 1024px){
+  #root {
+    height: 100vh;
+  }
+  .logo {
+    margin-top: 10rem;
+  }
+}

@@ -1,0 +1,31 @@
+@use '../abstract/var' as v;
+
+.app__calculator__btns-tip {
+    width: 45%;
+    height: 48px;
+    font-size: 1.5rem;
+    background: v.$very-dark-cyan;
+    color: v.$white;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+        background: v.$almost-light-grayish-cyan;
+        color: v.$very-dark-cyan;
+    }
+    &:focus, &:active {
+        background: v.$strong-cyan;
+        color: v.$very-dark-cyan;
+    }
+}
+
+@media (min-width: 375px){
+    .app__calculator__btns-tip {
+        width: 47.5%;
+    }
+}
+
+@media (min-width: 1024px){
+    .app__calculator__btns-tip {
+        width: 28%;
+    }
+}

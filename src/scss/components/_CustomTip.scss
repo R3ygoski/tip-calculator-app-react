@@ -1,0 +1,31 @@
+@use '../abstract/var' as v;
+
+.app__calculator__btns-input {
+    width: 45%;
+    height: 48px;
+    padding-right: 1rem;
+    text-align: right;
+    font-size: 1.5rem; 
+    background: v.$very-light-grayish-cyan;
+    color: v.$dark-grayish-cyan; 
+    &:focus, &:active {
+        outline: 2px solid v.$strong-cyan;
+        outline-offset: -2px;
+    }
+    &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+}
+
+@media (min-width: 375px){
+    .app__calculator__btns-input {
+        width: 47.5%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .app__calculator__btns-input {
+        width: 29.5%;
+        height: 48px;
+    }
+}
